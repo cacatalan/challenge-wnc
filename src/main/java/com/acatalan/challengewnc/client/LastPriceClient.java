@@ -26,7 +26,7 @@ public class LastPriceClient {
 	public LastPrice getLastPrice() {
 		LastPrice lastPrice = this.webClient
 								.get()
-								.uri("https://cex.io/api/last_price/BTC/USD")
+								.uri("/last_price/BTC/USD")
 								//.accept(MediaType.APPLICATION_JSON)
 								.retrieve()
 								.bodyToMono(LastPrice.class)
