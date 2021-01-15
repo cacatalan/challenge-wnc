@@ -5,23 +5,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acatalan.challengewnc.client.LastPriceClient;
 import com.acatalan.challengewnc.dto.LastPrice;
+import com.acatalan.challengewnc.service.impl.LastPriceService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @RestController
 public class LastPriceApi {
 	
 	@Autowired
-	private LastPriceClient client;
+	private LastPriceService service;
 	
-	@RequestMapping(value="/lastprice", method=RequestMethod.GET)
-	public LastPrice getByFirstCurrencyAndSecondCurrency() {
+	@RequestMapping(value="/lastpriceDefault", method=RequestMethod.GET)
+	public LastPrice getDefault() {
 		return new LastPrice("100.05", "BTC", "USD");
 	}
 	
-	@RequestMapping(value="/lastprice2", method=RequestMethod.GET)
-	public LastPrice getByFirstCurrencyAndSecondCurrency2() {
-		return client.getLastPrice();
+	@RequestMapping(value="/lastprice", method=RequestMethod.GET)
+	public LastPrice getByFirstCurrencyAndSecondCurrency() throws JsonMappingException, JsonProcessingException {
+		return service.getByFirstCurrencyAndSecondCurrency();
 	}
 	
 }

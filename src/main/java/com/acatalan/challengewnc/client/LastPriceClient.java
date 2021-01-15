@@ -3,31 +3,20 @@ package com.acatalan.challengewnc.client;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.acatalan.challengewnc.dto.LastPrice;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class LastPriceClient {
-
-	private WebClient webClient;
 	
-	private WebClient.Builder builder = WebClient.builder();
-
-	public LastPriceClient() {
-		webClient = WebClient
-					  .builder()
-					  .baseUrl("https://cex.io/api")
-					  .build();
-	}
-	
-	public LastPrice getLastPrice() {
-		LastPrice lastPrice = this.webClient
+	public Mono<String> getByFirstCurrencyAndSecondCurrency() throws JsonMappingException, JsonProcessingException {
+		return WebClient.create("https://cex.io/api/last_price/BTC")
 								.get()
-								.uri("/last_price/BTC/USD")
+								.uri(uriBuilder -> uriBuilder.path("/USD").build())
 								.retrieve()
-								.bodyToMono(LastPrice.class)
-								.block();
-		
-		return lastPrice;
+								.bodyToMono(String.class);
 	}
 
 }
