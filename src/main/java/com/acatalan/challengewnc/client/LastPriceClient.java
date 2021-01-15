@@ -15,11 +15,7 @@ public class LastPriceClient {
 	public LastPriceClient() {
 		webClient = WebClient
 					  .builder()
-					    .baseUrl("https://cex.io/api")
-//					    .defaultCookie("cookieKey", "cookieValue")
-//					    .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) 
-//		                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-//					    .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8080"))
+					  .baseUrl("https://cex.io/api")
 					  .build();
 	}
 	
@@ -27,7 +23,6 @@ public class LastPriceClient {
 		LastPrice lastPrice = this.webClient
 								.get()
 								.uri("/last_price/BTC/USD")
-								//.accept(MediaType.APPLICATION_JSON)
 								.retrieve()
 								.bodyToMono(LastPrice.class)
 								.block();
