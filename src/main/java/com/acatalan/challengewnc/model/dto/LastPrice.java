@@ -1,4 +1,4 @@
-package com.acatalan.challengewnc.dto;
+package com.acatalan.challengewnc.model.dto;
 
 import java.io.Serializable;
 
@@ -18,5 +18,6 @@ public class LastPrice implements Serializable {
 	private String lprice;
 	private String curr1;
 	private String curr2;
+	private String timestamp;
 
 }

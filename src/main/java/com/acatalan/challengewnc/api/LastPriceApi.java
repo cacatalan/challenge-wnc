@@ -1,14 +1,21 @@
 package com.acatalan.challengewnc.api;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acatalan.challengewnc.dto.LastPrice;
-import com.acatalan.challengewnc.service.impl.LastPriceService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.acatalan.challengewnc.model.dto.LastPrice;
+import com.acatalan.challengewnc.model.entity.Price;
+import com.acatalan.challengewnc.model.request.LastPriceByTimestamp;
+import com.acatalan.challengewnc.service.LastPriceService;
 
 @RestController
 public class LastPriceApi {
@@ -16,14 +23,25 @@ public class LastPriceApi {
 	@Autowired
 	private LastPriceService service;
 	
-	@RequestMapping(value="/lastpriceDefault", method=RequestMethod.GET)
-	public LastPrice getDefault() {
-		return new LastPrice("100.05", "BTC", "USD");
+	@RequestMapping(value="/prices", method=RequestMethod.GET)
+	public ResponseEntity<List<Price>> findAll() {
+		return ResponseEntity.ok(service.findAll());
 	}
 	
-	@RequestMapping(value="/lastprice", method=RequestMethod.GET)
-	public LastPrice getByFirstCurrencyAndSecondCurrency() throws JsonMappingException, JsonProcessingException {
-		return service.getByFirstCurrencyAndSecondCurrency();
+	@RequestMapping(value="/prices/{id}", method=RequestMethod.GET)
+	public ResponseEntity<LastPrice> findById(@PathVariable Long id) throws Exception {
+		return ResponseEntity.ok(service.findById(id));
+	}
+	
+	@RequestMapping(value="/prices_by_timestamp", method=RequestMethod.POST)
+	public ResponseEntity<LastPrice> findByTimestamp(@Valid @RequestBody LastPriceByTimestamp request) throws Exception {
+		return ResponseEntity.ok(service.findByTimestamp(request));
+	}
+	
+	@RequestMapping(value="/load_prices", method=RequestMethod.POST)
+	public ResponseEntity<String> loadPrices() {
+		service.loadPrices();
+		return ResponseEntity.ok("Loaded price list.");
 	}
 	
 }
