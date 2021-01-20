@@ -22,5 +22,9 @@ public class Price {
 	private String curr2;
 	
 	private String timestamp;
+	
+	public Double getLprice () {
+		return Double.valueOf(this.lprice);
+	}
 
 }
