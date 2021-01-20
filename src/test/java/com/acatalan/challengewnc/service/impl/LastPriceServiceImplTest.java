@@ -1,7 +1,6 @@
 package com.acatalan.challengewnc.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,31 +17,6 @@ class LastPriceServiceImplTest {
 	
 	@Autowired
 	LastPriceServiceImpl service = new LastPriceServiceImpl();
-
-	@Test
-	void testFindAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testFindById() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testFindByTimestamp() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testLoadPrices() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testLoadPrices2() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	void getMaxPriceOfList() throws NotFoundException {

@@ -30,3 +30,12 @@ POST/load_prices
 	
 # INSTRUCCIONES
 
+Compilar y ejecutar tests
+-
+	cd challenge-wnc/
+	mvn clean install
+
+Correr aplicación local
+-
+	cd challenge-wnc/target/
+	java -jar challengewnc-0.0.1-SNAPSHOT.jar
