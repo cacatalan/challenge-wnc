@@ -19,7 +19,7 @@ class PriceRepositoryTest {
     private PriceRepository repository;
 
 	@Test
-	void testFindAll() {
+	void whenFindAll_ThenReturnPriceList() {
 		Price price = this.getPriceDefault(1L);
 		repository.save(price);			
 		List<Price> result = repository.findAll();
@@ -29,7 +29,7 @@ class PriceRepositoryTest {
 	}
 
 	@Test
-	void testSave() {
+	void whenSave_ThenReturnPriceByIdAndSaveSuccessfully() {
 		Price price = this.getPriceDefault(2L);
 		repository.save(price);
 		Optional<Price> result = repository.findById(2L);
@@ -39,7 +39,7 @@ class PriceRepositoryTest {
 	}
 
 	@Test
-	void testFindById() {
+	void whenFindByID_ThenReturnPriceByIdSuccessfully() {
 		Price price = this.getPriceDefault(3L);
 		repository.save(price);
 		Optional<Price> result = repository.findById(3L);
@@ -48,6 +48,12 @@ class PriceRepositoryTest {
 		assertTrue(result.get().getId()==3L);
 	}
 
+	/**
+	 * Get price default and id parameter
+	 * Obtiene un objeto precio con los datos default y id de parametro.
+	 * @param id -- id of Price
+	 * @return Price data default with id parameter.
+	 */
 	private Price getPriceDefault(Long id) {
 		Price price = new Price();
 			price.setId(id);
